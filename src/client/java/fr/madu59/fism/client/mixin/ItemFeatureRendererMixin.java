@@ -11,7 +11,7 @@ import net.minecraft.client.renderer.item.ItemStackRenderState.FoilType;
 
 @Mixin(ItemFeatureRenderer.class)
 public abstract class ItemFeatureRendererMixin {
-    @Redirect(method = "renderItem", at = @At(value = "INVOKE", target = "foilType"))
+    @Redirect(method = "render", at = @At(value = "INVOKE", target = "foilType"))
     private FoilType fism$cancelGlintRendering(ItemSubmit itemSubmit){
         if(ModCompat.isShadowPass()) return FoilType.NONE;
         return itemSubmit.foilType();

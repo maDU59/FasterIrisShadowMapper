@@ -10,20 +10,20 @@ import com.mojang.blaze3d.vertex.PoseStack;
 
 import fr.madu59.fism.client.compat.ModCompat;
 import net.minecraft.client.model.Model;
-import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.blockentity.BannerRenderer;
 import net.minecraft.client.renderer.feature.ModelFeatureRenderer;
-import net.minecraft.client.resources.model.sprite.SpriteGetter;
+import net.minecraft.client.resources.model.Material;
+import net.minecraft.client.resources.model.MaterialSet;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
 
 @Mixin(BannerRenderer.class)
 public abstract class BannerRendererMixin {
     @Inject(method = "submitPatterns", at = @At("HEAD"), cancellable = true)
-    private static <S> void fism$cancelSubmitPatterns(final SpriteGetter sprites, final PoseStack poseStack, final SubmitNodeCollector submitNodeCollector, final int lightCoords, final int overlayCoords, final Model<S> model, final S state, final boolean banner, final DyeColor baseColor, final BannerPatternLayers patterns, final ModelFeatureRenderer.@Nullable CrumblingOverlay breakProgress, CallbackInfo ci) {
+    private static <S> void fism$cancelSubmitPatterns(MaterialSet materialSet, PoseStack poseStack, SubmitNodeCollector submitNodeCollector, int i, int j, Model<S> model, S object, Material material, boolean bl, DyeColor dyeColor, BannerPatternLayers bannerPatternLayers, boolean bl2, ModelFeatureRenderer.@Nullable CrumblingOverlay crumblingOverlay, int k, CallbackInfo ci) {
         if(ModCompat.isShadowPass()) {
-            BannerRendererAccessor.fism$submitPatternLayerInvoke(sprites, poseStack, submitNodeCollector, lightCoords, overlayCoords, model, state, banner ? Sheets.BANNER_PATTERN_BASE : Sheets.SHIELD_PATTERN_BASE, baseColor, breakProgress);
+            BannerRendererAccessor.fism$submitPatternLayerInvoke(materialSet, poseStack, submitNodeCollector, i, j, model, object, material, dyeColor, crumblingOverlay);
             ci.cancel();
         }
     }
