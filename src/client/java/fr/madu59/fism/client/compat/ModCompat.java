@@ -41,7 +41,8 @@ public class ModCompat {
     }
 
     public static boolean isEntityCullingLoaded(){
-        return isEntityCullingLoaded;
+        return false;
+        //return isEntityCullingLoaded;
     }
 
     private static AABB setUpAABB(BlockPos pos, BlockEntityType<?> beType){
