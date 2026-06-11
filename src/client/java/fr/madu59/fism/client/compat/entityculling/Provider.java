@@ -2,6 +2,7 @@ package fr.madu59.fism.client.compat.entityculling;
 
 import com.logisticscraft.occlusionculling.DataProvider;
 
+import net.minecraft.client.GraphicsStatus;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.BlockPos;
@@ -22,7 +23,8 @@ public class Provider implements DataProvider {
     public boolean isOpaqueFullCube(int x, int y, int z) {
         BlockPos pos = new BlockPos(x, y, z);
         var state = world.getBlockState(pos);
-        if (!Minecraft.getInstance().options.cutoutLeaves().get() && state.getBlock() instanceof LeavesBlock) {
+
+        if (Minecraft.getInstance().options.graphicsMode().get() == GraphicsStatus.FAST && state.getBlock() instanceof LeavesBlock) {
             return true;
         }
         return state.isSolidRender();
