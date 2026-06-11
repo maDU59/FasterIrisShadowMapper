@@ -1,2 +1,2 @@
 # What's new:
-- Original release
+- Removed redundant mixins

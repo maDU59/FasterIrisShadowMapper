@@ -6,9 +6,7 @@
 		"AbstractSignRendererMixin",
 		"BannerRendererAccessor",
 		"BannerRendererMixin",
-		"ItemFeatureRendererMixin",
 		"MapRendererMixin",
-		"ModelPartFeatureRendererMixin",
 		"ItemStackMixin",
 		"compat.iris.ShadowRendererMixin"
 	],
