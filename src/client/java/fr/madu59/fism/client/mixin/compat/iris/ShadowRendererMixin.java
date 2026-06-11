@@ -3,7 +3,6 @@ package fr.madu59.fism.client.mixin.compat.iris;
 import java.util.Iterator;
 
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -28,9 +27,6 @@ import net.minecraft.world.phys.Vec3;
 @Mixin(ShadowRenderer.class)
 public class ShadowRendererMixin {
 
-    @Shadow
-    float sunPathRotation;
-
     @Inject(
         method = "renderShadows",
         at = @At("HEAD")
@@ -53,7 +49,7 @@ public class ShadowRendererMixin {
 
             while(state.hasNext()) {
                 BlockEntityRenderState blockEntityRenderState = (BlockEntityRenderState)state.next();
-                if (ModCompat.isOcclusionCulled(blockEntityRenderState.blockPos, blockEntityRenderState.blockEntityType, sunPathRotation)) {
+                if (ModCompat.isOcclusionCulled(blockEntityRenderState.blockPos, blockEntityRenderState.blockEntityType)) {
                     FasterIrisShadowMapperClient.counter += 1;
                     state.remove();
                 }
@@ -77,7 +73,7 @@ public class ShadowRendererMixin {
         Entity entity
     ) {
         if (ModCompat.isShadowPass()) {
-            if (ModCompat.isOcclusionCulled(entity.getBoundingBox(), sunPathRotation)) {
+            if (ModCompat.isOcclusionCulled(entity.getBoundingBox())) {
                 int lastIndex = levelRenderState.entityRenderStates.size() - 1;
                 if (lastIndex >= 0) {
                     FasterIrisShadowMapperClient.counter += 1;
