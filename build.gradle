@@ -113,7 +113,7 @@ publishMods {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
         
 		minecraftVersionRange {
-            start = "1.21.3"
+            start = "1.21.2"
             end = "1.21.3"
         }
 
@@ -127,7 +127,7 @@ publishMods {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
 
 		minecraftVersionRange {
-            start = "1.21.3"
+            start = "1.21.2"
             end = "1.21.3"
         }
 
