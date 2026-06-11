@@ -1,10 +1,12 @@
 package fr.madu59.fism.client.mixin.compat.iris;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
@@ -55,28 +57,17 @@ public class ShadowRendererMixin {
         }
     }
 
-    @Inject(
-        method = "extractVisibleEntities",
+    @Redirect(
+        method = "renderEntities",
         at = @At(
             value = "INVOKE", 
-            target = "Ljava/util/List;add(Ljava/lang/Object;)Z",
-            shift = At.Shift.AFTER
+            target = "add"
         ),
-        locals = LocalCapture.CAPTURE_FAILEXCEPTION
     )
-    private void fism$removeAfterAdd(
-        Camera camera, Frustum frustum, DeltaTracker deltaTracker, LevelRenderState levelRenderState,
-        CallbackInfo ci,
-        Vec3 vec3, double d, double e, double f, TickRateManager tickRateManager, Iterator<Entity> iterator,
-        Entity entity
-    ) {
+    private void fism$filterShadowEntities(List<Entity> renderedEntities, Entity entity) {
         if (ModCompat.isShadowPass()) {
-            if (ModCompat.isOcclusionCulled(entity.getBoundingBox())) {
-                int lastIndex = levelRenderState.entityRenderStates.size() - 1;
-                if (lastIndex >= 0) {
-                    FasterIrisShadowMapperClient.counter += 1;
-                    levelRenderState.entityRenderStates.remove(lastIndex);
-                }
+            if (!ModCompat.isOcclusionCulled(entity.getBoundingBox())) {
+                renderedEntities.add(entity);
             }
         }
     }
