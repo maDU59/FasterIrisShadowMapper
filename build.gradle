@@ -78,6 +78,10 @@ jar {
 	}
 }
 
+base {
+	archivesName = project.name + "+" + project.minecraft_version
+}
+
 // configure the maven publication
 publishing {
 	publications {
