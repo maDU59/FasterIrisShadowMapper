@@ -3,9 +3,9 @@
 	"id": "fism",
 	"version": "${version}",
 	"name": "Faster Iris Shadow Mapper",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Makes Iris shadow mapping process faster",
 	"authors": [
-		"Me!"
+		"maDU59_"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
