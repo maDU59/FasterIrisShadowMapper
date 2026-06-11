@@ -17,10 +17,10 @@ public class EntityCullingCompat {
         cullingInstance.resetCache();
     }
 
-    public static boolean isOcclusionCulled(AABB aabb, float sunPathRotation){
+    public static boolean isOcclusionCulled(AABB aabb){
         aabbMin.set(aabb.minX, aabb.minY, aabb.minZ);
         aabbMax.set(aabb.maxX, aabb.maxY, aabb.maxZ);
-        Vector3d vec = ModCompat.getCameraPosition(sunPathRotation);
+        Vector3d vec = ModCompat.getCameraPosition();
         return !cullingInstance.isAABBVisible(aabbMin, aabbMax, new Vec3d(vec.x, vec.y, vec.z));
     }
 }
