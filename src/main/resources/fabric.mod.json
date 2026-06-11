@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "modid",
+	"id": "fism",
 	"version": "${version}",
-	"name": "Example Mod",
+	"name": "Faster Iris Shadow Mapper",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
 		"Me!"
@@ -11,21 +11,20 @@
 		"homepage": "https://fabricmc.net/",
 		"sources": "https://github.com/FabricMC/fabric-example-mod"
 	},
-	"license": "CC0-1.0",
-	"icon": "assets/modid/icon.png",
+	"license": "MIT",
+	"icon": "assets/fism/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
-			"com.example.ExampleMod"
+			"fr.madu59.fism.FasterIrisShadowMapper"
 		],
 		"client": [
-			"com.example.client.ExampleModClient"
+			"fr.madu59.fism.client.FasterIrisShadowMapperClient"
 		]
 	},
 	"mixins": [
-		"modid.mixins.json",
 		{
-			"config": "modid.client.mixins.json",
+			"config": "fism.client.mixins.json",
 			"environment": "client"
 		}
 	],

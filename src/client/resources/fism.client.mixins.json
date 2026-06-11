@@ -1,0 +1,21 @@
+{
+	"required": true,
+	"package": "fr.madu59.fism.client.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"AbstractSignRendererMixin",
+		"BannerRendererAccessor",
+		"BannerRendererMixin",
+		"ItemFeatureRendererMixin",
+		"MapRendererMixin",
+		"ModelPartFeatureRendererMixin",
+		"ItemStackMixin",
+		"compat.iris.ShadowRendererMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}
