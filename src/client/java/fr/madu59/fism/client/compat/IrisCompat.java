@@ -12,7 +12,8 @@ public class IrisCompat {
     private static Vector3d sunPos = null;
 
     public static boolean isShadowPass(){
-        return api.isRenderingShadowPass();
+        return true;
+        //return api.isRenderingShadowPass();
     }
 
     public static Vector3d getCameraPosition(){
