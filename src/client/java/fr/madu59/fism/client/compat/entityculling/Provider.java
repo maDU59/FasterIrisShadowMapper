@@ -27,7 +27,7 @@ public class Provider implements DataProvider {
         if (Minecraft.getInstance().options.graphicsMode().get() == GraphicsStatus.FAST && state.getBlock() instanceof LeavesBlock) {
             return true;
         }
-        return state.isSolidRender();
+        return state.isSolidRender(Minecraft.getInstance().level, pos);
     }
 
     @Override

@@ -17,8 +17,8 @@ import net.minecraft.world.level.block.entity.BannerPatternLayers;
 
 @Mixin(BannerRenderer.class)
 public abstract class BannerRendererMixin {
-    @Inject(method = "renderPatterns(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/model/geom/ModelPart;Lnet/minecraft/client/resources/model/Material;ZLnet/minecraft/world/item/DyeColor;Lnet/minecraft/world/level/block/entity/BannerPatternLayers;ZZ)V", at = @At("HEAD"), cancellable = true)
-    private static <S> void fism$cancelRenderPatterns(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, ModelPart modelPart, Material material, boolean bl, DyeColor dyeColor, BannerPatternLayers bannerPatternLayers, boolean bl2, boolean bl3, CallbackInfo ci) {
+    @Inject(method = "renderPatterns(Lcom/mojang/blaze3d/vertex/PoseStack;Lnet/minecraft/client/renderer/MultiBufferSource;IILnet/minecraft/client/model/geom/ModelPart;Lnet/minecraft/client/resources/model/Material;ZLnet/minecraft/world/item/DyeColor;Lnet/minecraft/world/level/block/entity/BannerPatternLayers;Z)V", at = @At("HEAD"), cancellable = true)
+    private static <S> void fism$cancelRenderPatterns(PoseStack poseStack, MultiBufferSource multiBufferSource, int i, int j, ModelPart modelPart, Material material, boolean bl, DyeColor dyeColor, BannerPatternLayers bannerPatternLayers, boolean bl2, CallbackInfo ci) {
         if(ModCompat.isShadowPass()) {
             BannerRendererAccessor.fism$renderPatternLayerInvoke(poseStack, multiBufferSource, i, j, modelPart, material, dyeColor);
             ci.cancel();
