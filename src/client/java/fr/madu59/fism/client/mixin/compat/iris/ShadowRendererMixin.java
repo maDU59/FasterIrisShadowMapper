@@ -34,50 +34,50 @@ public class ShadowRendererMixin {
         FasterIrisShadowMapperClient.counter = 0;
     }
 
-    // @Inject(
-    //     method = "extractVisibleBlockEntities",
-    //     at = @At("RETURN"
-    //     )
-    // )
-    // private void fism$filterShadowBlockEntities(
-    //     LevelRendererAccessor accessor, BufferSource bufferSource, PoseStack modelView, float tickDelta, Camera camera, LevelRenderState levelRenderState, boolean lightsOnly, CallbackInfo ci
-    // ) {
-    //     if (ModCompat.isShadowPass()) {
-    //         Iterator<BlockEntityRenderState> state = levelRenderState.blockEntityRenderStates.iterator();
+    @Inject(
+        method = "extractVisibleBlockEntities",
+        at = @At("RETURN"
+        )
+    )
+    private void fism$filterShadowBlockEntities(
+        LevelRendererAccessor accessor, BufferSource bufferSource, PoseStack modelView, float tickDelta, Camera camera, LevelRenderState levelRenderState, boolean lightsOnly, CallbackInfo ci
+    ) {
+        if (ModCompat.isShadowPass()) {
+            Iterator<BlockEntityRenderState> state = levelRenderState.blockEntityRenderStates.iterator();
 
-    //         while(state.hasNext()) {
-    //             BlockEntityRenderState blockEntityRenderState = (BlockEntityRenderState)state.next();
-    //             if (ModCompat.isOcclusionCulled(blockEntityRenderState.blockPos, blockEntityRenderState.blockEntityType)) {
-    //                 FasterIrisShadowMapperClient.counter += 1;
-    //                 state.remove();
-    //             }
-    //         }
-    //     }
-    // }
+            while(state.hasNext()) {
+                BlockEntityRenderState blockEntityRenderState = (BlockEntityRenderState)state.next();
+                if (ModCompat.isOcclusionCulled(blockEntityRenderState.blockPos, blockEntityRenderState.blockEntityType)) {
+                    FasterIrisShadowMapperClient.counter += 1;
+                    state.remove();
+                }
+            }
+        }
+    }
 
-    // @Inject(
-    //     method = "extractVisibleEntities",
-    //     at = @At(
-    //         value = "INVOKE", 
-    //         target = "Ljava/util/List;add(Ljava/lang/Object;)Z",
-    //         shift = At.Shift.AFTER
-    //     ),
-    //     locals = LocalCapture.CAPTURE_FAILEXCEPTION
-    // )
-    // private void fism$removeAfterAdd(
-    //     Camera camera, Frustum frustum, DeltaTracker deltaTracker, LevelRenderState levelRenderState,
-    //     CallbackInfo ci,
-    //     Vec3 vec3, double d, double e, double f, TickRateManager tickRateManager, Iterator<Entity> iterator,
-    //     Entity entity
-    // ) {
-    //     if (ModCompat.isShadowPass()) {
-    //         if (ModCompat.isOcclusionCulled(entity.getBoundingBox())) {
-    //             int lastIndex = levelRenderState.entityRenderStates.size() - 1;
-    //             if (lastIndex >= 0) {
-    //                 FasterIrisShadowMapperClient.counter += 1;
-    //                 levelRenderState.entityRenderStates.remove(lastIndex);
-    //             }
-    //         }
-    //     }
-    // }
+    @Inject(
+        method = "extractVisibleEntities",
+        at = @At(
+            value = "INVOKE", 
+            target = "Ljava/util/List;add(Ljava/lang/Object;)Z",
+            shift = At.Shift.AFTER
+        ),
+        locals = LocalCapture.CAPTURE_FAILEXCEPTION
+    )
+    private void fism$removeAfterAdd(
+        Camera camera, Frustum frustum, DeltaTracker deltaTracker, LevelRenderState levelRenderState,
+        CallbackInfo ci,
+        Vec3 vec3, double d, double e, double f, TickRateManager tickRateManager, Iterator<Entity> iterator,
+        Entity entity
+    ) {
+        if (ModCompat.isShadowPass()) {
+            if (ModCompat.isOcclusionCulled(entity.getBoundingBox())) {
+                int lastIndex = levelRenderState.entityRenderStates.size() - 1;
+                if (lastIndex >= 0) {
+                    FasterIrisShadowMapperClient.counter += 1;
+                    levelRenderState.entityRenderStates.remove(lastIndex);
+                }
+            }
+        }
+    }
 }
