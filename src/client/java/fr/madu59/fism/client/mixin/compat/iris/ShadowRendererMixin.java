@@ -20,7 +20,7 @@ import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
 import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
 import net.minecraft.client.renderer.culling.Frustum;
-import net.minecraft.client.renderer.state.level.LevelRenderState;
+import net.minecraft.client.renderer.state.LevelRenderState;
 import net.minecraft.world.TickRateManager;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.phys.Vec3;

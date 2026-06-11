@@ -1,6 +1,7 @@
 plugins {
-	id 'net.fabricmc.fabric-loom' version "${loom_version}"
+	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 	id 'maven-publish'
+	id "me.modmuss50.mod-publish-plugin" version "2.0.0"
 }
 
 version = project.mod_version
@@ -30,14 +31,15 @@ loom {
 dependencies {
 	// To change the versions see the gradle.properties file
 	minecraft "com.mojang:minecraft:${project.minecraft_version}"
+	mappings loom.officialMojangMappings()
 	
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-	implementation("net.caffeinemc:sodium-fabric:0.8.12+mc26.1.2")
-	implementation("maven.modrinth:iris:1.10.9+26.1-fabric")
+	implementation("net.caffeinemc:sodium-fabric:0.8.7+mc1.21.11")
+	implementation("maven.modrinth:iris:1.10.7+1.21.11-fabric")
 	compileOnly "com.logisticscraft:occlusionculling:0.0.8-SNAPSHOT"
 	
 }
@@ -52,7 +54,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 25
+	it.options.release = 21
 }
 
 java {
@@ -61,8 +63,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_25
-	targetCompatibility = JavaVersion.VERSION_25
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
 }
 
 jar {
@@ -89,4 +91,40 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+publishMods {
+    file = remapJar.archiveFile
+    changelog = providers.fileContents(layout.projectDirectory.file("CHANGELOG.md")).asText.get()
+    type = STABLE
+	version = project.mod_version
+    modLoaders.add("fabric")
+	modLoaders.add("quilt")
+
+    curseforge {
+		displayName = file.map { it.asFile.name }
+        projectId = project.curseforge_id
+        accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
+        
+		minecraftVersionRange {
+            start = "1.21.11"
+            end = "1.21.11"
+        }
+
+        client = true
+        server = false
+        requires("fabric-api")
+    }
+    modrinth {
+		displayName = "Fancy World Animations $project.mod_version"
+        projectId = project.modrinth_id
+        accessToken = providers.environmentVariable("MODRINTH_TOKEN")
+
+		minecraftVersionRange {
+            start = "1.21.11"
+            end = "1.21.11"
+        }
+
+		requires("fabric-api")
+    }
 }
