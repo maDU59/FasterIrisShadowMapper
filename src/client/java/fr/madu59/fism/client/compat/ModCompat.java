@@ -17,8 +17,8 @@ public class ModCompat {
         else return false;
     }
 
-    public static Vector3d getCameraPosition(float sunPathRotation){
-        if(isIrisLoaded()) return IrisCompat.getCameraPosition(sunPathRotation);
+    public static Vector3d getCameraPosition(){
+        if(isIrisLoaded()) return IrisCompat.getCameraPosition();
         else return new Vector3d();
     }
 
@@ -26,12 +26,12 @@ public class ModCompat {
         return isIrisLoaded;
     }
 
-    public static boolean isOcclusionCulled(BlockPos blockPos, BlockEntityType<?> beType, float sunPathRotation){
-        return isOcclusionCulled(setUpAABB(blockPos, beType), sunPathRotation);
+    public static boolean isOcclusionCulled(BlockPos blockPos, BlockEntityType<?> beType){
+        return isOcclusionCulled(setUpAABB(blockPos, beType));
     }
 
-    public static boolean isOcclusionCulled(AABB aabb, float sunPathRotation){
-        if(isEntityCullingLoaded()) return EntityCullingCompat.isOcclusionCulled(aabb, sunPathRotation);
+    public static boolean isOcclusionCulled(AABB aabb){
+        if(isEntityCullingLoaded()) return EntityCullingCompat.isOcclusionCulled(aabb);
         else return false;
     }
 
