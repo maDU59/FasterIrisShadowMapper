@@ -26,6 +26,12 @@ loom {
 		}
 	}
 
+	runs{
+		client{
+			vmArgs "-Dsodium.checks.issue2561=false"
+		}
+	}
+
 }
 
 dependencies {
@@ -38,10 +44,10 @@ dependencies {
 	// Fabric API. This is technically optional, but you probably want it anyway.
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
 
-	modImplementation "maven.modrinth:sodium:u1OEbNKx"
+	modImplementation "maven.modrinth:sodium:mc1.20.1-0.5.13-fabric"
 	localRuntime 'org.anarres:jcpp:1.4.14'
-    localRuntime 'io.github.douira:glsl-transformer:3.0.0-pre3'
-	modImplementation("maven.modrinth:iris:1.8.8+1.21.1-fabric")
+    localRuntime 'io.github.douira:glsl-transformer:2.0.1'
+	modImplementation("maven.modrinth:iris:1.7.6+1.20.1-fabric")
 	modCompileOnly "com.logisticscraft:occlusionculling:0.0.8-SNAPSHOT"
 	
 }
@@ -56,7 +62,7 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-	it.options.release = 21
+	it.options.release = 17
 }
 
 java {
@@ -65,8 +71,8 @@ java {
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
 
-	sourceCompatibility = JavaVersion.VERSION_21
-	targetCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {
@@ -113,8 +119,8 @@ publishMods {
         accessToken = providers.environmentVariable("CURSEFORGE_TOKEN")
         
 		minecraftVersionRange {
-            start = "1.21"
-            end = "1.21.1"
+            start = "1.20.1"
+            end = "1.20.1"
         }
 
         client = true
@@ -127,8 +133,8 @@ publishMods {
         accessToken = providers.environmentVariable("MODRINTH_TOKEN")
 
 		minecraftVersionRange {
-            start = "1.21"
-            end = "1.21.1"
+            start = "1.20.1"
+            end = "1.20.1"
         }
 
 		requires("fabric-api")
