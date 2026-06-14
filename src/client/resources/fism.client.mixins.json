@@ -7,8 +7,7 @@
 		"BannerRendererAccessor",
 		"BannerRendererMixin",
 		"MapRendererMixin",
-		"ItemStackMixin",
-		"compat.iris.ShadowRendererMixin"
+		"ItemStackMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
