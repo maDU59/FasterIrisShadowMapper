@@ -15,12 +15,6 @@
 	"icon": "assets/fism/icon.png",
 	"environment": "*",
 	"entrypoints": {
-		"main": [
-			"fr.madu59.fism.FasterIrisShadowMapper"
-		],
-		"client": [
-			"fr.madu59.fism.client.FasterIrisShadowMapperClient"
-		]
 	},
 	"mixins": [
 		{

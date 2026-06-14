@@ -36,7 +36,6 @@
 //     )
 //     private void fism$startShadowMapping(CallbackInfo ci){
 //         ModCompat.clearCache();
-//         FasterIrisShadowMapperClient.counter = 0;
 //     }
 
 //     @Inject(
