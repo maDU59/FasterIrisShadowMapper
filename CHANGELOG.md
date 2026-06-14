@@ -1,3 +1,2 @@
 # What's new:
-- Reduced chances of crashes when using old/beta Iris versions
-- Removed unused code
+- Fixed a crash happening only outside of dev env
