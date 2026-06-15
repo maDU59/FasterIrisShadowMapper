@@ -6,11 +6,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import fr.madu59.fism.compat.ModCompat;
-import net.minecraft.client.renderer.blockentity.AbstractSignRenderer;
+import net.minecraft.client.renderer.blockentity.SignRenderer;
 
-@Mixin(AbstractSignRenderer.class)
+@Mixin(SignRenderer.class)
 public abstract class AbstractSignRendererMixin {
-    @Inject(method = "submitSignText", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "renderSignText", at = @At("HEAD"), cancellable = true)
     public void fism$cancelSignTextRendering(CallbackInfo ci){
         if(ModCompat.isShadowPass()) ci.cancel();
     }

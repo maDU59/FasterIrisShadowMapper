@@ -1,30 +1,23 @@
 package fr.madu59.fism.mixin.compat.iris;
 // package fr.madu59.fism.client.mixin.compat.iris;
 
-// import java.util.Iterator;
+// import java.util.List;
 
 // import org.spongepowered.asm.mixin.Mixin;
-// import org.spongepowered.asm.mixin.Pseudo;
 // import org.spongepowered.asm.mixin.injection.At;
 // import org.spongepowered.asm.mixin.injection.Inject;
+// import org.spongepowered.asm.mixin.injection.Redirect;
 // import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-// import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
 
 // import com.mojang.blaze3d.vertex.PoseStack;
 
 // import fr.madu59.fism.client.FasterIrisShadowMapperClient;
 // import fr.madu59.fism.client.compat.ModCompat;
-// import net.irisshaders.iris.mixin.LevelRendererAccessor;
 // import net.irisshaders.iris.shadows.ShadowRenderer;
-// import net.minecraft.client.Camera;
-// import net.minecraft.client.DeltaTracker;
-// import net.minecraft.client.renderer.MultiBufferSource.BufferSource;
-// import net.minecraft.client.renderer.blockentity.state.BlockEntityRenderState;
-// import net.minecraft.client.renderer.culling.Frustum;
-// import net.minecraft.client.renderer.state.level.LevelRenderState;
-// import net.minecraft.world.TickRateManager;
+// import net.minecraft.client.renderer.MultiBufferSource;
+// import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 // import net.minecraft.world.entity.Entity;
-// import net.minecraft.world.phys.Vec3;
+// import net.minecraft.world.level.block.entity.BlockEntity;
 
 // @Pseudo
 // @Mixin(targets = "net.irisshaders.iris.shadows.ShadowRenderer", remap = false)
@@ -39,51 +32,32 @@ package fr.madu59.fism.mixin.compat.iris;
 //         ModCompat.clearCache();
 //     }
 
-//     @Inject(
-//         method = "extractVisibleBlockEntiti",
-//         at = @At("RETURN"),
-//         require = 0
+//     @Redirect(
+//         method = "renderBlockEntities",
+//         at = @At(value = "INVOKE", target = "render")
 //     )
-//     private void fism$filterShadowBlockEntities(
-//         LevelRendererAccessor accessor, BufferSource bufferSource, PoseStack modelView, float tickDelta, Camera camera, LevelRenderState levelRenderState, boolean lightsOnly, CallbackInfo ci
-//     ) {
+//     private void fism$filterShadowBlockEntities(BlockEntityRenderDispatcher dispatcher, BlockEntity be, float tickDelta, PoseStack modelView, MultiBufferSource bufferSource) {
 //         if (ModCompat.isShadowPass()) {
-//             Iterator<BlockEntityRenderState> state = levelRenderState.blockEntityRenderStates.iterator();
-
-//             while(state.hasNext()) {
-//                 BlockEntityRenderState blockEntityRenderState = (BlockEntityRenderState)state.next();
-//                 if (ModCompat.isOcclusionCulled(blockEntityRenderState.blockPos, blockEntityRenderState.blockEntityType)) {
-//                     FasterIrisShadowMapperClient.counter += 1;
-//                     state.remove();
-//                 }
+//             if (!ModCompat.isOcclusionCulled(be.getBlockPos(), be.getType())) {
+//                 dispatcher.render(be, tickDelta, modelView, bufferSource);
 //             }
 //         }
 //     }
 
-//     @Inject(
-//         method = "extractVisibleEntities",
+//     @Redirect(
+//         method = "renderEntities",
 //         at = @At(
 //             value = "INVOKE", 
-//             target = "Ljava/util/List;add(Ljava/lang/Object;)Z",
-//             shift = At.Shift.AFTER
-//         ),
-//         locals = LocalCapture.CAPTURE_FAILEXCEPTION,
-//         require = 0
+//             target = "add"
+//         )
 //     )
-//     private void fism$removeAfterAdd(
-//         Camera camera, Frustum frustum, DeltaTracker deltaTracker, LevelRenderState levelRenderState,
-//         CallbackInfo ci,
-//         Vec3 vec3, double d, double e, double f, TickRateManager tickRateManager, Iterator<Entity> iterator,
-//         Entity entity
-//     ) {
+//     private boolean fism$filterShadowEntities(List<Entity> renderedEntities, Object object) {
 //         if (ModCompat.isShadowPass()) {
-//             if (ModCompat.isOcclusionCulled(entity.getBoundingBox())) {
-//                 int lastIndex = levelRenderState.entityRenderStates.size() - 1;
-//                 if (lastIndex >= 0) {
-//                     FasterIrisShadowMapperClient.counter += 1;
-//                     levelRenderState.entityRenderStates.remove(lastIndex);
-//                 }
+//             Entity entity = (Entity) object;
+//             if (!ModCompat.isOcclusionCulled(entity.getBoundingBox())) {
+//                 renderedEntities.add(entity);
 //             }
 //         }
+//         return true;
 //     }
 // }

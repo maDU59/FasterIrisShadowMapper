@@ -5,14 +5,16 @@ import java.nio.file.Path;
 import net.neoforged.fml.loading.FMLLoader;
 import net.neoforged.fml.loading.FMLPaths;
 
+
+
 public class PlatformHelper {
 
     public static String getPlatformName(){
-        return "NeoForge";
+        return "Neoforge";
     }
     
     public static boolean isModLoaded(String modId){
-        return FMLLoader.getCurrent().getLoadingModList().getModFileById(modId) != null;
+        return FMLLoader.getLoadingModList().getModFileById(modId) != null;
     }
 
     public static Path getConfigDir(){
