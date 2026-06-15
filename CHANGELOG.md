@@ -1,2 +1,3 @@
 # What's new:
-- Fixed a crash happening only outside of dev env
+- Fixed java requirement being too high
+- Lowered fabric loader requirement
