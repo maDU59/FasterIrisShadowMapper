@@ -1,4 +1,4 @@
-package fr.madu59.fism.client.mixin;
+package fr.madu59.fism.mixin;
 
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;

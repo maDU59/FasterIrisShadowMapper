@@ -1,4 +1,4 @@
-package fr.madu59.fism.client.mixin;
+package fr.madu59.fism.mixin;
 
 import org.jspecify.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -8,7 +8,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 
-import fr.madu59.fism.client.compat.ModCompat;
+import fr.madu59.fism.compat.ModCompat;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.renderer.Sheets;
 import net.minecraft.client.renderer.SubmitNodeCollector;

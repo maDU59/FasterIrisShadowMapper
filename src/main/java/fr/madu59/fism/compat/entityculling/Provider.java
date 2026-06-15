@@ -1,4 +1,4 @@
-package fr.madu59.fism.client.compat.entityculling;
+package fr.madu59.fism.compat.entityculling;
 
 import com.logisticscraft.occlusionculling.DataProvider;
 

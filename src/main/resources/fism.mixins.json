@@ -1,6 +1,6 @@
 {
 	"required": true,
-	"package": "fr.madu59.fism.client.mixin",
+	"package": "fr.madu59.fism.mixin",
 	"compatibilityLevel": "JAVA_25",
 	"client": [
 		"AbstractSignRendererMixin",

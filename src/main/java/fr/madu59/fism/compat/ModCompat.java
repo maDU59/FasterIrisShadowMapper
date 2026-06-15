@@ -1,9 +1,9 @@
-package fr.madu59.fism.client.compat;
+package fr.madu59.fism.compat;
 
 import org.joml.Vector3d;
 
-import fr.madu59.fism.client.compat.entityculling.EntityCullingCompat;
-import fr.madu59.fism.client.platform.PlatformHelper;
+import fr.madu59.fism.compat.entityculling.EntityCullingCompat;
+import fr.madu59.fism.platform.PlatformHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.AABB;
