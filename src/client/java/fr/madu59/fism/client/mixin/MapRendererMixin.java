@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.entity.ItemFrameRenderer;
 
 @Mixin(ItemFrameRenderer.class)
 public abstract class MapRendererMixin {
-    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/MapItem;getSavedData(Lnet/minecraft/world/level/saveddata/maps/MapId;Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/level/saveddata/maps/MapItemSavedData;", shift = At.Shift.BEFORE), cancellable = true)
+    @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/MapItem;getSavedData(Ljava/lang/Integer;Lnet/minecraft/world/level/Level;)Lnet/minecraft/world/level/saveddata/maps/MapItemSavedData;"), cancellable = true)
     public <S> void fism$cancelMapRendering(CallbackInfo ci) {
         if(ModCompat.isShadowPass()) {
             ci.cancel();
