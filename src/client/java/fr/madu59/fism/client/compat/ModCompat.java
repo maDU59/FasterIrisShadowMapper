@@ -6,6 +6,7 @@ import fr.madu59.fism.client.compat.entityculling.EntityCullingCompat;
 import fr.madu59.fism.client.platform.PlatformHelper;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
+import net.minecraft.world.level.block.entity.BlockEntityTypes;
 import net.minecraft.world.phys.AABB;
 
 public class ModCompat {
@@ -46,7 +47,7 @@ public class ModCompat {
     }
 
     private static AABB setUpAABB(BlockPos pos, BlockEntityType<?> beType){
-        if (beType == BlockEntityType.BANNER) {
+        if (beType == BlockEntityTypes.BANNER) {
             return new AABB(pos).inflate(0, 1, 0);
         }
         return new AABB(pos);
