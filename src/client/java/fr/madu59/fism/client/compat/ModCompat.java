@@ -5,8 +5,8 @@ import org.joml.Vector3d;
 import fr.madu59.fism.client.compat.entityculling.EntityCullingCompat;
 import fr.madu59.fism.client.platform.PlatformHelper;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class ModCompat {
     private static boolean isIrisLoaded = PlatformHelper.isModLoaded("iris") || PlatformHelper.isModLoaded("occulus");
