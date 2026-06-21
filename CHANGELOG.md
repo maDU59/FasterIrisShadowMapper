@@ -1,2 +1,3 @@
 # What's new:
-- Fixed incorrect mixin target
+- Bug fixes
+- Backported to forge 1.20.1

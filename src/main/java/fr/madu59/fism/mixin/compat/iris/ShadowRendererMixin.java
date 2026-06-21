@@ -1,3 +1,4 @@
+package fr.madu59.fism.mixin.compat.iris;
 // package fr.madu59.fism.client.mixin.compat.iris;
 
 // import java.util.List;

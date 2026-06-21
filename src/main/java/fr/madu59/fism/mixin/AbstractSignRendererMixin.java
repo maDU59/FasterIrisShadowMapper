@@ -1,11 +1,11 @@
-package fr.madu59.fism.client.mixin;
+package fr.madu59.fism.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import fr.madu59.fism.client.compat.ModCompat;
+import fr.madu59.fism.compat.ModCompat;
 import net.minecraft.client.renderer.blockentity.SignRenderer;
 
 @Mixin(SignRenderer.class)

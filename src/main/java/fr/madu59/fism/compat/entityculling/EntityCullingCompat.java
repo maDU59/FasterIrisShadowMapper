@@ -1,11 +1,11 @@
-package fr.madu59.fism.client.compat.entityculling;
+package fr.madu59.fism.compat.entityculling;
 
 import org.joml.Vector3d;
 
 import com.logisticscraft.occlusionculling.OcclusionCullingInstance;
 import com.logisticscraft.occlusionculling.util.Vec3d;
 
-import fr.madu59.fism.client.compat.ModCompat;
+import fr.madu59.fism.compat.ModCompat;
 import net.minecraft.world.phys.AABB;
 
 public class EntityCullingCompat {

@@ -1,4 +1,4 @@
-package fr.madu59.fism.client.compat;
+package fr.madu59.fism.compat;
 
 import org.joml.Vector3d;
 import org.joml.Vector4f;

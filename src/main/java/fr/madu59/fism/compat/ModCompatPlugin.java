@@ -1,10 +1,10 @@
-package fr.madu59.fism.client.compat;
+package fr.madu59.fism.compat;
 
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
-import fr.madu59.fism.client.platform.PlatformHelper;
+import fr.madu59.fism.platform.PlatformHelper;
 
 import java.util.List;
 import java.util.Set;
