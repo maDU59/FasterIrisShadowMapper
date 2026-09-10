@@ -1,55 +1,24 @@
 package fr.madu59.fism.client.compat;
 
-import org.joml.Vector3d;
-
-import fr.madu59.fism.client.compat.entityculling.EntityCullingCompat;
-import fr.madu59.fism.client.platform.PlatformHelper;
-import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.minecraft.world.level.block.entity.BlockEntityTypes;
-import net.minecraft.world.phys.AABB;
-
 public class ModCompat {
-    private static boolean isIrisLoaded = PlatformHelper.isModLoaded("iris") || PlatformHelper.isModLoaded("occulus");
-    private static boolean isEntityCullingLoaded = PlatformHelper.isModLoaded("entityculling");
+    private static boolean isIrisLoaded = classExist("net.irisshaders.iris.api.v0.IrisApi");
 
     public static boolean isShadowPass(){
         if(isIrisLoaded()) return IrisCompat.isShadowPass();
+        if(BerylCompat.isShadowPass()) return true;
         else return false;
     }
 
-    public static Vector3d getCameraPosition(){
-        if(isIrisLoaded()) return IrisCompat.getCameraPosition();
-        else return new Vector3d();
+    private static boolean classExist(String classpath){
+        try {
+            Class.forName(classpath);
+            return true;
+        } catch( ClassNotFoundException e ) {
+            return false;
+        }
     }
 
     public static boolean isIrisLoaded(){
         return isIrisLoaded;
-    }
-
-    public static boolean isOcclusionCulled(BlockPos blockPos, BlockEntityType<?> beType){
-        return isOcclusionCulled(setUpAABB(blockPos, beType));
-    }
-
-    public static boolean isOcclusionCulled(AABB aabb){
-        if(isEntityCullingLoaded()) return EntityCullingCompat.isOcclusionCulled(aabb);
-        else return false;
-    }
-
-    public static void clearCache(){
-        if(isEntityCullingLoaded()) EntityCullingCompat.clearCache();
-        if(isIrisLoaded()) IrisCompat.clearCache();
-    }
-
-    public static boolean isEntityCullingLoaded(){
-        return false;
-        //return isEntityCullingLoaded;
-    }
-
-    private static AABB setUpAABB(BlockPos pos, BlockEntityType<?> beType){
-        if (beType == BlockEntityTypes.BANNER) {
-            return new AABB(pos).inflate(0, 1, 0);
-        }
-        return new AABB(pos);
     }
 }
